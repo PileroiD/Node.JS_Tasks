@@ -1,0 +1,20 @@
+{
+  "name": "note-app",
+  "version": "1.0.1",
+  "description": "this is simple node.js app",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "node",
+    "javascript"
+  ],
+  "author": "Oleksandr Lozynskyi <pileroid@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "lodash": "^4.17.21",
+    "yargs": "^17.7.2"
+  }
+}

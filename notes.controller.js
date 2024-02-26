@@ -40,6 +40,20 @@ async function printNotes() {
     });
 }
 
+async function editNote({ id, title }) {
+    const notes = await getNotes();
+    notes.map((note) => {
+        if (note.id === id) {
+            note.title = title;
+            return note;
+        }
+        return note;
+    });
+
+    await fs.writeFile(notesPath, JSON.stringify(notes));
+    console.log(chalk.green.inverse("Note was edited"));
+}
+
 async function getNotes() {
     const notes = await fs.readFile(notesPath, { encoding: "utf-8" });
     return Array.isArray(JSON.parse(notes)) ? JSON.parse(notes) : [];
@@ -49,4 +63,6 @@ module.exports = {
     addNote,
     removeNote,
     printNotes,
+    getNotes,
+    editNote,
 };

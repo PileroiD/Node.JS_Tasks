@@ -29,14 +29,24 @@
             <div class="card">
                 <ul class="list-group">
                     <% for (let i = 0; i < notes.length; i++) { %>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div class="title">
-                                <%= notes[i].title %>
+                        <li class="list-group-item">
+                            <div class="item-wrapper d-flex justify-content-between align-items-center">
+                                <div class="title">
+                                    <%= notes[i].title %>
+                                </div>
+    
+                                <div class="btn-wrapper">   
+                                    <button class="btn btn-primary" data-type="edit" data-id="<%= notes[i].id %>">Обновить</button>
+                                    <button class="btn btn-danger" data-type="remove" data-id="<%= notes[i].id %>">&times;</button>
+                                </div>
                             </div>
-
-                            <div class="btn-wrapper">   
-                                <button class="btn btn-primary" data-type="edit" data-id="<%= notes[i].id %>">Редактировать</button>
-                                <button class="btn btn-danger" data-type="remove" data-id="<%= notes[i].id %>">&times;</button>
+                            <div class="item-wrapper d-none justify-content-between align-items-center">
+                                <input type="text" required value="<%= notes[i].title %>">
+    
+                                <div class="btn-wrapper">   
+                                    <button class="btn btn-success" data-type="save" data-id="<%= notes[i].id %>">Сохранить</button>
+                                    <button class="btn btn-danger" data-type="cancel" data-id="<%= notes[i].id %>">Отменить</button>
+                                </div>
                             </div>
                         </li>
                     <% } %>

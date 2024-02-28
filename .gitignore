@@ -9,3 +9,4 @@ env/
 venv/
 package-lock.json
 server.example.js
+models/

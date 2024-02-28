@@ -38,7 +38,7 @@ const noteAddMessage = document.querySelector(".alert");
 if (noteAddMessage) {
     setTimeout(() => {
         noteAddMessage.remove();
-    }, 1500);
+    }, 2000);
 }
 
 function toggleItemEditWrappers(target) {

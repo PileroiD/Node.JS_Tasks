@@ -1,6 +1,7 @@
 const chalk = require("chalk");
 const express = require("express");
 const path = require("path");
+const mongoose = require("mongoose");
 const {
     addNote,
     getNotes,
@@ -29,16 +30,27 @@ app.get("/", async (req, res) => {
         title: "Express App",
         notes: await getNotes(),
         created: false,
+        error: false,
     });
 });
 
 app.post("/", async (req, res) => {
-    await addNote(req.body.title);
-    res.render("index", {
-        title: "Express App",
-        notes: await getNotes(),
-        created: true,
-    });
+    try {
+        await addNote(req.body.title);
+        res.render("index", {
+            title: "Express App",
+            notes: await getNotes(),
+            created: true,
+            error: false,
+        });
+    } catch (error) {
+        res.render("index", {
+            title: "Express App",
+            notes: await getNotes(),
+            created: false,
+            error: true,
+        });
+    }
 });
 
 app.delete("/:id", async (req, res) => {
@@ -47,6 +59,7 @@ app.delete("/:id", async (req, res) => {
         title: "Express App",
         notes: await getNotes(),
         created: false,
+        error: false,
     });
 });
 
@@ -56,9 +69,20 @@ app.put("/", async (req, res) => {
         title: "Express App",
         notes: await getNotes(),
         created: false,
+        error: false,
     });
 });
 
-app.listen(port, () => {
-    console.log(chalk.green(`Server has been started on port ${port} ...`));
-});
+const dbPassword = "NakGRIRWTj3UcyUi";
+
+mongoose
+    .connect(
+        `mongodb+srv://aleksandrlozinskiy2005:${dbPassword}@cluster0.tu9ykk2.mongodb.net/notes?retryWrites=true&w=majority&appName=Cluster0`
+    )
+    .then(() => {
+        app.listen(port, () => {
+            console.log(
+                chalk.green(`Server has been started on port ${port} ...`)
+            );
+        });
+    });
